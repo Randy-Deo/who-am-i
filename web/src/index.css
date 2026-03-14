@@ -1,0 +1,126 @@
+:root {
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  --content-max: 960px;
+  --content-padding-x: 60px;
+
+  --bg: #020617;
+  --bg-elevated: #020617;
+  --border: #020617;
+  --text: #e5e7eb;
+  --text-h: #f9fafb;
+  --muted: #94a3b8;
+  --accent: #00e6e6;
+  --accent-soft: #0f172a;
+  --accent-border: #00e6e6;
+  --timeline: #020617;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px;
+  box-sizing: border-box;
+}
+
+.shell {
+  width: 100%;
+  max-width: var(--content-max);
+  min-width: 0;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  overflow-x: visible;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell-inner {
+  padding: 80px var(--content-padding-x) 40px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --content-padding-x: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .shell {
+    border-radius: 20px;
+  }
+
+  :root {
+    --content-padding-x: 16px;
+  }
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--heading);
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 2.8rem;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+  margin: 0 0 4px;
+}
+
+h3 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
