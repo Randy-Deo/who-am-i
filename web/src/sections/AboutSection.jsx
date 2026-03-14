@@ -6,7 +6,7 @@ export function AboutSection() {
       <div className="hero">
         <div className="hero-left">
           <img
-            src="/randy-profile.png"
+            src={`${import.meta.env.BASE_URL}randy-profile.png`}
             alt="Randy Deo"
             className="hero-photo"
           />
