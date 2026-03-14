@@ -157,33 +157,70 @@ Changing `--content-max` or `--content-padding-x` affects both the navbar and th
 
 ### Local build
 
-- From the `web` folder: `npm run build`. Output is in `web/dist`. Serve that folder with any static host.
+From the `web` folder run `npm run build`. Output is in `web/dist`. You can serve that folder with any static host.
 
-### GitHub Pages (project site)
+---
 
-The site is set up to deploy to GitHub Pages at `https://<username>.github.io/who-am-i/`.
+### GitHub Pages (free)
 
-1. **One-time setup**
-   - In GitHub: repo **Settings → Pages**. Set source to **Deploy from a branch**. Branch: **gh-pages**, folder: **/ (root)**. Save.
-   - From the repo root, install the deploy dependency and run deploy from `web`:
+The site is configured to be hosted on **GitHub Pages** at:
+
+**https://\<your-username>.github.io/who-am-i/**
+
+GitHub Pages serves the built static files. You do not commit the `dist` folder; the deploy script builds and pushes it to a separate branch.
+
+#### One-time setup
+
+1. **Enable GitHub Pages**
+   - On GitHub, open your repo → **Settings** → **Pages** (under “Code and automation”).
+   - Under **Build and deployment**, set **Source** to **Deploy from a branch**.
+   - **Branch:** choose **gh-pages** (the branch will be created when you run deploy for the first time).
+   - **Folder:** **/ (root)**.
+   - Click **Save**.
+
+2. **First deploy**
+   - On your machine, from the repo root:
      ```bash
      cd web
      npm install
      npm run deploy
      ```
-   - `npm run deploy` runs `vite build` then pushes the contents of `web/dist` to the **gh-pages** branch. GitHub then serves that at `https://<username>.github.io/who-am-i/`.
+   - The first time you run `npm run deploy`, the **gh-pages** branch is created automatically. You do not need to create it yourself.
+   - When prompted for credentials, use your GitHub username and a **Personal Access Token (PAT)** as the password (GitHub no longer accepts account passwords for Git over HTTPS). Create a token at: GitHub → **Settings** → **Developer settings** → **Personal access tokens** → **Tokens (classic)** → **Generate new token**, with `repo` scope.
+   - After a minute or two, the site will be live at the URL above.
 
-2. **After making changes**
-   - From `web`: `npm run deploy`. No need to commit the `dist` folder; `gh-pages` pushes it on its own.
+#### Deploying updates
 
-3. **If you rename the repo**
-   - Update the production base path in `web/vite.config.js`: change `'/who-am-i/'` to `'/your-new-repo-name/'` in the `base` option (inside the `mode === 'production'` branch). Then run `npm run deploy` again.
+Whenever you want the live site to reflect your latest code:
 
-### Base path
+1. Commit and push your changes to your usual branch (e.g. `main` or `WAI-1`).
+2. From the `web` folder run:
+   ```bash
+   npm run deploy
+   ```
+3. The script builds the app and pushes the built files to the **gh-pages** branch. The **live site always serves from gh-pages**; the branch you run deploy from only determines which version of the code gets built and pushed.
 
-- **Development:** `base` is `'/'` so the app runs at `http://localhost:5173/`.
-- **Production:** `base` is `'/who-am-i/'` so assets and routes work when the site is served at `https://<username>.github.io/who-am-i/`.
-- To deploy to a different subpath, change the production `base` in `web/vite.config.js` to match (e.g. `'/other-path/'`).
+No need to switch to `main` to deploy—you can run `npm run deploy` from any branch. The site will show whatever code was in that branch at the time you ran deploy.
+
+#### If you rename the repo
+
+The site URL will become `https://<username>.github.io/<new-repo-name>/`. Update the production base path so assets load correctly:
+
+- In `web/vite.config.js`, change `'/who-am-i/'` to `'/your-new-repo-name/'` (in the `mode === 'production'` branch).
+- Run `npm run deploy` again.
+
+#### Public assets (e.g. profile photo)
+
+Files in `web/public/` are copied to the build output as-is. The hero image uses `import.meta.env.BASE_URL` so it works both locally and on GitHub Pages. If you add other images in `public/`, reference them like: `` src={`${import.meta.env.BASE_URL}your-file.png`} `` so they work when the site is served from a subpath.
+
+#### Base path summary
+
+| Environment | Base path | Site URL |
+|-------------|-----------|----------|
+| Local dev   | `/`       | `http://localhost:5173/` |
+| Production  | `/who-am-i/` | `https://<username>.github.io/who-am-i/` |
+
+To use a different subpath, change the production `base` in `web/vite.config.js` to match.
 
 ---
 
