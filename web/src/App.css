@@ -33,6 +33,10 @@
   color: var(--muted);
 }
 
+.brand-role-line {
+  display: inline;
+}
+
 .nav {
   display: flex;
   align-items: center;
@@ -174,8 +178,13 @@
     font-size: 1rem;
   }
 
+  .brand-role-line {
+    display: block;
+  }
+
   .nav {
     position: relative;
+    margin-left: auto;
   }
 
   .nav-hamburger {
@@ -187,8 +196,10 @@
     position: absolute;
     top: 100%;
     right: 0;
+    left: auto;
     margin-top: 8px;
     min-width: 180px;
+    max-width: min(280px, calc(100vw - 32px));
     flex-direction: column;
     gap: 0;
     padding: 12px 16px;

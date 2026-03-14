@@ -27,7 +27,10 @@ export function Navbar({ activeSection }) {
     <header className="app-header">
       <div className="brand">
         <div className="brand-name">Randy Deo</div>
-        <div className="brand-role">Software Developer / Quality Assurance Engineer</div>
+        <div className="brand-role">
+          <span className="brand-role-line">Software Developer / </span>
+          <span className="brand-role-line">Quality Assurance Engineer</span>
+        </div>
       </div>
       <nav className={`nav ${menuOpen ? 'nav-open' : ''}`} aria-label="Primary">
         <button
