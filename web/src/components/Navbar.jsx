@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 const links = [
   { id: 'about', href: '#about', label: 'About' },
   { id: 'experience', href: '#experience', label: 'Experience' },
@@ -6,15 +8,41 @@ const links = [
   { id: 'contact', href: '#contact', label: 'Contact' },
 ]
 
+const MOBILE_BREAKPOINT = 1000
+
 export function Navbar({ activeSection }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const closeMenu = () => setMenuOpen(false)
+
+  useEffect(() => {
+    const closeOnResize = () => {
+      if (window.innerWidth > MOBILE_BREAKPOINT) setMenuOpen(false)
+    }
+    window.addEventListener('resize', closeOnResize)
+    return () => window.removeEventListener('resize', closeOnResize)
+  }, [])
+
   return (
     <header className="app-header">
       <div className="brand">
         <div className="brand-name">Randy Deo</div>
         <div className="brand-role">Software Developer / Quality Assurance Engineer</div>
       </div>
-      <nav className="nav" aria-label="Primary">
-        <div className="nav-links">
+      <nav className={`nav ${menuOpen ? 'nav-open' : ''}`} aria-label="Primary">
+        <button
+          type="button"
+          className="nav-hamburger"
+          aria-expanded={menuOpen}
+          aria-controls="nav-menu"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          <span className="nav-hamburger-line" />
+          <span className="nav-hamburger-line" />
+          <span className="nav-hamburger-line" />
+        </button>
+        <div id="nav-menu" className="nav-links">
           {links.map((link) => (
             <a
               key={link.href}
@@ -22,6 +50,7 @@ export function Navbar({ activeSection }) {
               className={`nav-link${
                 activeSection === link.id ? ' nav-link-active' : ''
               }`}
+              onClick={closeMenu}
             >
               <span>{link.label}</span>
             </a>

@@ -6,16 +6,16 @@
   --content-max: 960px;
   --content-padding-x: 60px;
 
-  --bg: #020617;
-  --bg-elevated: #020617;
-  --border: #020617;
+  --bg: #0e1419;
+  --bg-elevated: #0e1419;
+  --border: #0e1419;
   --text: #e5e7eb;
   --text-h: #f9fafb;
   --muted: #94a3b8;
-  --accent: #00e6e6;
+  --accent: #5de5c7;
   --accent-soft: #0f172a;
-  --accent-border: #00e6e6;
-  --timeline: #020617;
+  --accent-border: #5de5c7;
+  --timeline: #0e1419;
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
@@ -69,7 +69,7 @@ body {
   padding: 80px var(--content-padding-x) 40px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   :root {
     --content-padding-x: 24px;
   }

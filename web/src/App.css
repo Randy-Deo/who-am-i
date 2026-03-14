@@ -1,8 +1,8 @@
 .app-header {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  padding: 22px var(--content-padding-x) 18px;
+  padding: 22px max(16px, var(--content-padding-x)) 18px;
   border-bottom: 1px solid var(--border);
   position: fixed;
   top: 0;
@@ -10,6 +10,7 @@
   transform: translateX(-50%);
   width: 100%;
   max-width: var(--content-max);
+  box-sizing: border-box;
   z-index: 20;
   background: var(--bg-elevated);
 }
@@ -21,14 +22,14 @@
 }
 
 .brand-name {
-  font-size: 1rem;
+  font-size: 1.1rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-h);
 }
 
 .brand-role {
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: var(--muted);
 }
 
@@ -38,10 +39,41 @@
   gap: 18px;
 }
 
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: var(--bg-elevated);
+  color: var(--text-h);
+  cursor: pointer;
+  border-radius: 12px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.nav-hamburger:hover {
+  background: var(--bg-elevated);
+  border-color: rgba(148, 163, 184, 0.5);
+}
+
+.nav-hamburger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  margin: 0 auto;
+}
+
 .nav-links {
   display: flex;
   gap: 24px;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  padding-bottom: 6px;
+  box-sizing: border-box;
 }
 
 .nav-link {
@@ -98,7 +130,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #020617;
+  background: var(--bg);
   color: var(--text-h);
   cursor: pointer;
   padding: 0;
@@ -132,17 +164,57 @@
   height: 16px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .app-header {
-    padding-inline: var(--content-padding-x);
+    padding-inline: max(16px, var(--content-padding-x));
+    flex-wrap: wrap;
   }
 
   .brand-role {
-    font-size: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .nav {
+    position: relative;
+  }
+
+  .nav-hamburger {
+    display: flex;
   }
 
   .nav-links {
     display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    min-width: 180px;
+    flex-direction: column;
+    gap: 0;
+    padding: 12px 16px;
+    background: var(--bg-elevated);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    transition: border-color 0.2s;
+  }
+
+  .nav-open .nav-links:hover {
+    border-color: rgba(148, 163, 184, 0.5);
+  }
+
+  .nav-open .nav-links {
+    display: flex;
+  }
+
+  .nav-links .nav-link {
+    display: block;
+    width: fit-content;
+    padding: 12px 0;
+  }
+
+  .nav-links .nav-link::after {
+    bottom: 8px;
   }
 }
 
@@ -228,7 +300,7 @@
 }
 
 .hero-photo-placeholder {
-  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, var(--accent) 100%);
+  background: linear-gradient(135deg, rgba(93, 229, 199, 0.5) 0%, var(--accent) 100%);
 }
 
 .hero-title {
@@ -263,8 +335,8 @@
   margin-left: calc(-1 * var(--content-padding-x));
   margin-right: calc(-1 * var(--content-padding-x));
   padding: 14px 0;
-  border-top: 1px solid var(--accent);
-  border-bottom: 1px solid var(--accent);
+  border-top: 1px solid var(--muted);
+  border-bottom: 1px solid var(--muted);
   overflow: hidden;
 }
 
@@ -279,10 +351,10 @@
   display: flex;
   align-items: center;
   gap: 0 1ch;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--muted);
   white-space: nowrap;
 }
 
@@ -343,7 +415,7 @@
   margin: 0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .hero {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;
@@ -666,5 +738,18 @@
   width: 18px;
   height: 18px;
   color: var(--accent);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 28px;
+}
+
+.footer-logo {
+  width: 100px;
+  height: 100px;
+  display: block;
+  object-fit: contain;
 }
 
