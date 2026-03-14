@@ -116,7 +116,7 @@ function App() {
       </div>
       <footer className="footer">
         <img
-          src={`${import.meta.env.BASE_URL}rd-logo-trans-blk.png`}
+          src={`${import.meta.env.BASE_URL}rd-logo-trans-grey.png`}
           alt="RD"
           className="footer-logo"
         />
