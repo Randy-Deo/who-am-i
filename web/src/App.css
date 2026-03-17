@@ -576,12 +576,21 @@
   border: 1px solid rgba(148, 163, 184, 0.25);
   background: rgba(30, 41, 59, 0.6);
   padding: 16px 18px;
+  min-height: 200px;
   transition: border-color 0.2s, background 0.2s;
 }
 
 .project-card:hover {
   background: rgba(30, 41, 59, 0.85);
   border-color: rgba(148, 163, 184, 0.5);
+}
+
+.project-card--current {
+  border-color: var(--accent);
+}
+
+.project-card--current:hover {
+  border-color: var(--accent);
 }
 
 .project-name-row {
@@ -611,6 +620,7 @@
   font-size: 0.85rem;
   color: #9ca3af;
   margin-bottom: 6px;
+  white-space: pre-line;
 }
 
 .project-tech-list {

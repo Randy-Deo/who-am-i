@@ -29,37 +29,81 @@ export function AboutSection() {
       <div className="stack-bar">
         <div className="stack-bar-track" aria-hidden="true">
           <div className="stack-bar-inner">
-            <span>WEB</span>
+            <span>GOLANG</span>
             <span>/</span>
-            <span>PROGRAMMING</span>
+            <span>PYTHON</span>
             <span>/</span>
-            <span>DEVELOPMENT</span>
+            <span>SELENIUM</span>
             <span>/</span>
-            <span>TESTING</span>
+            <span>JIRA</span>
             <span>/</span>
-            <span>JAVASCRIPT</span>
+            <span>FIGMA</span>
+            <span>/</span>
+            <span>AWS</span>
+            <span>/</span>
+            <span>JENKINS</span>
+            <span>/</span>
+            <span>POSTMAN</span>
+            <span>/</span>
+            <span>REST APIs</span>
+            <span>/</span>
+            <span>BDD</span>
+            <span>/</span>
+            <span>MICROSERVICES</span>
+            <span>/</span>
+            <span>CONFLUENCE</span>
+            <span>/</span>
+            <span>BITBUCKET</span>
+            <span>/</span>
+            <span>KIBANA</span>
+            <span>/</span>
+            <span>DATADOG</span>
+            <span>/</span>
+            <span>LAMBDA</span>
+            <span>/</span>
+            <span>DYNAMODB</span>
+            <span>/</span>
+            <span>3D-SECURE</span>
+            <span>/</span>
+            <span>AGILE</span>
             <span>/</span>
             <span>GOLANG</span>
             <span>/</span>
             <span>PYTHON</span>
             <span>/</span>
-            <span>AWS</span>
+            <span>SELENIUM</span>
             <span>/</span>
-            <span>WEB</span>
+            <span>JIRA</span>
             <span>/</span>
-            <span>PROGRAMMING</span>
-            <span>/</span>
-            <span>DEVELOPMENT</span>
-            <span>/</span>
-            <span>TESTING</span>
-            <span>/</span>
-            <span>JAVASCRIPT</span>
-            <span>/</span>
-            <span>GOLANG</span>
-            <span>/</span>
-            <span>PYTHON</span>
+            <span>FIGMA</span>
             <span>/</span>
             <span>AWS</span>
+            <span>/</span>
+            <span>JENKINS</span>
+            <span>/</span>
+            <span>POSTMAN</span>
+            <span>/</span>
+            <span>REST APIs</span>
+            <span>/</span>
+            <span>BDD</span>
+            <span>/</span>
+            <span>MICROSERVICES</span>
+            <span>/</span>
+            <span>CONFLUENCE</span>
+            <span>/</span>
+            <span>BITBUCKET</span>
+            <span>/</span>
+            <span>KIBANA</span>
+            <span>/</span>
+            <span>DATADOG</span>
+            <span>/</span>
+            <span>LAMBDA</span>
+            <span>/</span>
+            <span>DYNAMODB</span>
+            <span>/</span>
+            <span>3D-SECURE</span>
+            <span>/</span>
+            <span>AGILE</span>
             <span>/</span>
           </div>
         </div>
@@ -72,13 +116,15 @@ export function AboutSection() {
         <div className="about-block-row">
           <div className="about-block-text">
             <p className="about-block-tagline">
-              Detail-oriented quality professional with a strong background in software development
+              Detail-oriented quality professional with a strong background in both software development
               and testing.
             </p>
             <p className="about-block-paragraph">
               I focus on building and testing reliable applications, identifying and debugging
-              defects early, and improving overall system quality through effective testing practices
-              and close collaboration with development teams.
+              defects early, and improving system quality through effective testing practices
+              and close collaboration with development teams. Having worked as both a developer
+              and a QA engineer, I design with testability in mind and aim to deliver more robust
+              solutions.
             </p>
           </div>
         </div>

@@ -6,7 +6,7 @@ export function ProjectsSection() {
     <Section id="projects" label="Selected work" title="Projects">
       <div className="projects-grid">
         {projects.map((project) => (
-          <article key={project.id} className="project-card">
+          <article key={project.id} className={`project-card${project.id === 'portfolio' ? ' project-card--current' : ''}`}>
             <div className="project-name-row">
               <h2 className="project-name">{project.name}</h2>
               {project.link && project.link !== '#' ? (
