@@ -1,6 +1,6 @@
 # who-am-i
 
-A minimal personal portfolio and living resume. Single-page site built with React and Vite.
+A personal portfolio and living resume—a place for a detailed breakdown of roles without summarizing or losing too much detail. Single-page site built with React and Vite; responsive, dark-theme design; deployed on GitHub Pages.
 
 ---
 
@@ -22,9 +22,9 @@ who-am-i/
     ├── package.json
     ├── vite.config.js
     ├── public/              ← Static assets (served at site root)
-    │   ├── favicon.svg
-    │   ├── randy-profile.png   ← Hero profile photo (replace to change photo)
-    │   └── icons.svg
+    │   ├── rd-logo-trans-blk.png   ← Favicon (used in index.html)
+    │   ├── rd-logo-trans-grey.png  ← Footer logo, optional
+    │   └── randy-profile.png       ← Hero profile photo (replace to change photo)
     └── src/
         ├── main.jsx         ← App entry
         ├── App.jsx          ← Layout, section order, navbar scroll/highlight logic
@@ -33,7 +33,7 @@ who-am-i/
         ├── components/      ← Reusable UI
         │   ├── Navbar.jsx   ← Top bar: name, role, section links
         │   ├── Section.jsx  ← Wrapper for each page section
-        │   └── Timeline.jsx  ← Experience entries (date, company, role, description, highlights)
+        │   └── Timeline.jsx  ← Experience entries (company, role, dates, location, description, technologies, highlights)
         ├── sections/        ← One file per page section
         │   ├── AboutSection.jsx
         │   ├── ExperienceSection.jsx
@@ -55,22 +55,23 @@ who-am-i/
 - **File:** `web/src/components/Navbar.jsx`
 - **What to edit:**
   - `brand-name`: Your name (e.g. `Randy Deo`)
-  - `brand-role`: Subtitle under name (e.g. `Software Developer / Quality Assurance Engineer`)
+  - `brand-role`: Subtitle under name. Use two `<span className="brand-role-line">` elements so on mobile (≤1000px) they stack on separate lines (e.g. `Software Developer /` and `Quality Assurance Engineer`).
   - `links`: Array of `{ id, href, label }` for each nav item. `id` must match the section `id` (e.g. `about`, `experience`, `skills`, `projects`, `contact`).
+- **Mobile:** At 1000px and below, the navbar shows a hamburger menu; the dropdown aligns to the right and stays on-screen. `MOBILE_BREAKPOINT` in Navbar.jsx and `@media (max-width: 1000px)` in CSS control this.
 
 ### Hero section (top of page)
 
 - **File:** `web/src/sections/AboutSection.jsx`
 - **What to edit:**
-  - **Profile photo:** The `<img>` uses `src="/randy-profile.png"`. Replace the file `web/public/randy-profile.png` with your own image (same filename), or change `src` to another path under `public/` (e.g. `src="/my-photo.jpg"`).
+  - **Profile photo:** The `<img>` uses `` src={`${import.meta.env.BASE_URL}randy-profile.png`} `` so it works locally and on GitHub Pages. Replace `web/public/randy-profile.png` or change the path.
   - **Greeting:** The line `Hi, I'm Randy` and the cyan period — edit the text inside the first `hero-title-line` span.
   - **Title lines:** The two lines under the greeting (`Software Developer /` and `QA Engineer`) — edit the two `hero-title-gradient` spans. The `/` is in a `hero-fullstop` span (accent color).
 - **Hero title font sizes:** In `web/src/App.css`, search for `.hero-title-line:first-of-type` (name line, default 2.8rem) and `.hero-title-gradient` (subtitle lines, 2.5rem).
 
-### Scrolling technology bar (WEB / PROGRAMMING / …)
+### Scrolling technology bar
 
 - **File:** `web/src/sections/AboutSection.jsx`
-- **What to edit:** Inside `<div className="stack-bar-inner">` there are repeated `<span>` elements (e.g. `WEB`, `PROGRAMMING`, `DEVELOPMENT`). Duplicate or remove blocks of spans to change the scrolling labels. The content is duplicated in the markup so the infinite scroll loops smoothly.
+- **What to edit:** Inside `<div className="stack-bar-inner">` there are repeated `<span>` elements (e.g. `GOLANG`, `PYTHON`, `SELENIUM`, `JIRA`, `AWS`, …). Duplicate or remove blocks of spans to change the scrolling labels. The list is duplicated in the markup so the infinite scroll loops smoothly.
 
 ### About block (tagline and paragraph under the tech bar)
 
@@ -84,26 +85,28 @@ who-am-i/
 - **File:** `web/src/data/experience.js`
 - **Structure:** Array of objects. Each object can have:
   - `id`: Unique string (e.g. `'zucitech'`)
-  - `company`: Company name (shown on the left of the first line)
-  - `role`: Job title (shown on the second line)
-  - `start`, `end`: Date range (e.g. `'Oct 2024'`, `'Present'`) — shown on the right of the first line
-  - `location`: Optional (not currently displayed in the UI)
-  - `description`: Short summary paragraph
-  - `highlights`: Array of bullet strings
+  - `company`: Company name (shown on the first line, left)
+  - `role`: Job title (shown under the company/date row)
+  - `start`, `end`: Date range (e.g. `'Oct 2024'`, `'Present'`) — shown on the first line, right
+  - `location`: Optional; if set, shown under the role (e.g. `'Remote'`)
+  - `description`: Short summary — a string, or an array of strings for multiple paragraphs
+  - `technologies`: Optional array of strings; shown as a comma-separated line (e.g. `['Python', 'Selenium', 'Jira']`)
+  - `highlights`: Array of bullet strings (no limit; add as much detail as you like)
   - `link`: Optional URL; if set, the company name becomes a clickable link with an arrow icon
-- **Rendering:** `web/src/sections/ExperienceSection.jsx` imports `experience` and passes it to `Timeline` in `web/src/components/Timeline.jsx`. Timeline layout and styles are in `App.css` (search for `experience-list`, `experience-item`, `experience-date`, etc.).
+- **Rendering:** `web/src/sections/ExperienceSection.jsx` imports `experience` and passes it to `Timeline` in `web/src/components/Timeline.jsx`. Timeline layout and styles are in `App.css` (search for `experience-list`, `experience-item`, `experience-date`, `experience-technologies`, etc.).
 
 ### Skills (categories and items)
 
 - **File:** `web/src/data/skills.js`
-- **Structure:** Array of `{ id, title, items }`. `title` is the category heading (e.g. `Languages`, `Frameworks`). `items` is an array of strings (e.g. `['JavaScript', 'Golang', 'Python', 'SQL']`).
+- **Structure:** Array of `{ id, title, items }`. `title` is the category heading (e.g. `Languages`, `Testing & QA`, `Tools & platforms`, `Practices & domains`). `items` is an array of strings.
 - **Rendering:** `web/src/sections/SkillsSection.jsx` imports `skills` and renders each group in a card with a bullet list. Styles: `App.css` — `skills-groups`, `skills-group-card`, `skills-group-title`, `skills-group-items`, `skill-item`, and `skill-item::marker` (accent color for bullets).
 
 ### Projects
 
 - **File:** `web/src/data/projects.js`
-- **Structure:** Array of objects: `id`, `name`, `description`, `tech` (array of strings), `link` (URL or `'#'`). If `link` is set and not `'#'`, a “View” link is shown.
-- **Rendering:** `web/src/sections/ProjectsSection.jsx`. Styles in `App.css`: `projects-grid`, `project-card`, `project-name`, `project-tech-list`, `project-tech-item`, etc.
+- **Structure:** Array of objects: `id`, `name`, `description`, `tech` (array of strings), `link` (URL or `'#'`). If `link` is set and not `'#'`, a “View” link is shown. `description` can include newlines (`\n`); `.project-description` uses `white-space: pre-line` so they render as line breaks.
+- **Current-site highlight:** The project with `id: 'portfolio'` gets the class `project-card--current` so its border uses the accent color (cyan). Cards have a `min-height` so short entries (e.g. who-am-i) don’t look stubby.
+- **Rendering:** `web/src/sections/ProjectsSection.jsx`. Styles in `App.css`: `projects-grid`, `project-card`, `project-card--current`, `project-name`, `project-tech-list`, `project-tech-item`, etc.
 
 ### Contact (links and email)
 
@@ -131,11 +134,11 @@ who-am-i/
 - **File:** `web/src/index.css`
 - **Variables:** Defined in `:root`. Important ones:
   - `--content-max`: Max width of navbar and main content (default `960px`).
-  - `--content-padding-x`: Horizontal padding for navbar and main content (default `60px`; overridden in media queries to `24px` at 900px and `16px` at 768px).
-  - `--accent`: Accent color (e.g. cyan `#00e6e6`). Used for links, bullets, timeline dots, section period, etc.
-  - `--text`, `--text-h`, `--muted`, `--bg`, `--border`: Text and background colors.
+  - `--content-padding-x`: Horizontal padding for navbar and main content (default `60px`; overridden to `24px` at 1000px and `16px` at 768px in media queries).
+  - `--accent`: Accent color (e.g. cyan `#5de5c7`). Used for links, bullets, timeline dots, section period, nav underline, project-card--current border, etc.
+  - `--text`, `--text-h`, `--muted`, `--bg`, `--bg-elevated`, `--border`: Text and background colors.
 
-Changing `--content-max` or `--content-padding-x` affects both the navbar and the main content width; the scrolling tech bar is sized to match the navbar.
+Changing `--content-max` or `--content-padding-x` affects both the navbar and the main content width; the scrolling tech bar is sized to match the navbar. Breakpoints for navbar (hamburger) and padding are at **1000px** in both `Navbar.jsx` and `App.css`/`index.css`.
 
 ### Component and section styles
 
@@ -209,9 +212,15 @@ The site URL will become `https://<username>.github.io/<new-repo-name>/`. Update
 - In `web/vite.config.js`, change `'/who-am-i/'` to `'/your-new-repo-name/'` (in the `mode === 'production'` branch).
 - Run `npm run deploy` again.
 
+#### Favicon and page title
+
+- **File:** `web/index.html`
+- **Favicon:** `<link rel="icon" href="rd-logo-trans-blk.png" />` — replace the file in `public/` or change `href` to another asset.
+- **Title:** `<title>Randy Deo - Software Developer</title>` — edit for your name and tagline.
+
 #### Public assets (e.g. profile photo)
 
-Files in `web/public/` are copied to the build output as-is. The hero image uses `import.meta.env.BASE_URL` so it works both locally and on GitHub Pages. If you add other images in `public/`, reference them like: `` src={`${import.meta.env.BASE_URL}your-file.png`} `` so they work when the site is served from a subpath.
+Files in `web/public/` are copied to the build output as-is. The hero image and footer logo use `import.meta.env.BASE_URL` so they work both locally and on GitHub Pages. If you add other images in `public/`, reference them like: `` src={`${import.meta.env.BASE_URL}your-file.png`} `` so they work when the site is served from a subpath.
 
 #### Base path summary
 
@@ -229,7 +238,8 @@ To use a different subpath, change the production `base` in `web/vite.config.js`
 | What you want to change        | Where to go |
 |--------------------------------|------------|
 | Your name / navbar role        | `web/src/components/Navbar.jsx` |
-| Hero photo                     | Replace `web/public/randy-profile.png` or change `src` in `AboutSection.jsx` |
+| Hero photo                     | Replace `web/public/randy-profile.png` or change `src` in `AboutSection.jsx` (use `import.meta.env.BASE_URL`) |
+| Page title / favicon           | `web/index.html` (`<title>`, `<link rel="icon">`) |
 | “Hi, I’m Randy” and title lines| `web/src/sections/AboutSection.jsx` (hero `h1` and spans) |
 | Scrolling tech bar labels      | `web/src/sections/AboutSection.jsx` (`stack-bar-inner` spans) |
 | About tagline and paragraph    | `web/src/sections/AboutSection.jsx` (about-block) |

@@ -1,25 +1,26 @@
 export const projects = [
   {
-    id: 'portfolio',
-    name: 'who-am-i',
-    description: 'Minimal personal site that acts as a living resume and portfolio.',
-    tech: ['React', 'Vite', 'CSS'],
-    link: '#',
-  },
-  {
     id: 'streaming-qa',
     name: 'Streaming Platform Quality Suite',
     description:
-      'End-to-end test coverage for a consumer streaming service across authentication, subscriptions, payments, playback, and account flows.',
-    tech: ['Python', 'Selenium', 'API Testing'],
+      'Lead QA for a high-traffic consumer streaming app: scope breakdown and assignment, documentation and onboarding, test plans from PRDs and Figma, and execution across functional, regression, integration, cross-browser, cross-device, and E2E. Validation of frontend UX, APIs, and payment flows; defect management in Jira; exploratory and smoke testing; automated regression with Python and Selenium.',
+    tech: ['Python', 'Selenium', 'Jira', 'Figma', 'API testing', 'E2E', 'Cross-browser'],
     link: '#',
   },
   {
     id: '3ds-service',
     name: '3D Secure Payment Service',
     description:
-      'Backend services and tests for EMVCo-compliant 3D Secure payment authentication used by U.S. clients.',
-    tech: ['Golang', 'AWS', 'Jenkins'],
+      'Microservices and REST APIs (Golang, Python) for a U.S.-facing 3D-Secure authentication service built to EMVCo specs and integrated with Visa, Mastercard, and Discover. Unit/E2E/BDD testing, On Call support, workflow improvements, and deployment/monitoring with AWS, Jenkins, and Atlassian.',
+    tech: ['Golang', 'Python', 'AWS', 'Jenkins', 'Jira', 'Confluence', 'Bitbucket', 'Kibana', 'Datadog'],
+    link: '#',
+  },
+  {
+    id: 'portfolio',
+    name: 'who-am-i',
+    description:
+      'Personal portfolio with a responsive, dark-theme design and deployed on GitHub Pages—a place for a detailed breakdown of my roles without summarizing or losing too much detail.',
+    tech: ['React', 'Vite', 'CSS'],
     link: '#',
   },
 ]
