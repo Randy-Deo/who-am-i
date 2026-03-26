@@ -168,7 +168,7 @@
   height: 16px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .app-header {
     padding-inline: max(16px, var(--content-padding-x));
     flex-wrap: wrap;
@@ -232,7 +232,7 @@
 .section {
   padding: 50px 0 45px;
   border-bottom: 1px solid var(--border);
-  scroll-margin-top: 140px;
+  scroll-margin-top: var(--nav-offset, 140px);
 }
 
 .section:last-of-type {
@@ -426,7 +426,7 @@
   margin: 0;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .hero {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;

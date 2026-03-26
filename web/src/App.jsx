@@ -14,91 +14,156 @@ function App() {
     const sections = Array.from(document.querySelectorAll('section.section'))
     if (!sections.length) return
 
-    const NAV_OFFSET = 140
-    const intersectingIds = new Set()
-
     const BOTTOM_THRESHOLD = 30
+
+    const getNavOffset = () => {
+      const header = document.querySelector('.app-header')
+      if (!header) return 140
+      const rect = header.getBoundingClientRect()
+      const height = Math.ceil(rect.height)
+      return height > 0 ? height : 140
+    }
+
+    const setNavOffsetCssVar = () => {
+      const offset = getNavOffset()
+      document.documentElement.style.setProperty('--nav-offset', `${offset}px`)
+      return offset
+    }
+
+    let navOffset = setNavOffsetCssVar()
+    let navLock = null
+    let lastScrollY = window.scrollY
     const isAtBottom = () => {
       const scrollBottom = window.scrollY + window.innerHeight
       const pageBottom = document.documentElement.scrollHeight
       return pageBottom - scrollBottom <= BOTTOM_THRESHOLD
     }
 
-    const getActiveId = () => {
-      if (isAtBottom()) return sections[sections.length - 1].id
+    const getActiveId = (offset) => {
+      // Only force the last section active when we're at the bottom AND not
+      // actively scrolling upward (otherwise Contact can feel "stuck").
+      if (isAtBottom() && window.scrollY >= lastScrollY - 2) {
+        return sections[sections.length - 1].id
+      }
 
-      const line = NAV_OFFSET
-      if (intersectingIds.size === 0) {
-        let activeId = sections[0].id
-        for (const s of sections) {
-          const r = s.getBoundingClientRect()
-          if (r.top <= line) activeId = s.id
-        }
-        return activeId
+      // "Active line" is just below the fixed header.
+      // Adding a tiny epsilon biases toward the next section when the line
+      // falls exactly on a section boundary.
+      const marker = window.scrollY + offset + 1
+      let activeId = sections[0].id
+      for (const s of sections) {
+        const top = s.getBoundingClientRect().top + window.scrollY
+        if (top <= marker) activeId = s.id
+        else break
       }
-      const candidates = []
-      for (const id of intersectingIds) {
-        const el = document.getElementById(id)
-        if (!el) continue
-        const r = el.getBoundingClientRect()
-        const containsLine = r.top <= line && r.bottom > line
-        if (containsLine) candidates.push({ id, top: r.top })
-      }
-      if (candidates.length > 0) {
-        const best = candidates.reduce((a, b) => (a.top < b.top ? a : b))
-        return best.id
-      }
-      let fallback = null
-      let fallbackTop = Infinity
-      for (const id of intersectingIds) {
-        const el = document.getElementById(id)
-        if (!el) continue
-        const top = el.getBoundingClientRect().top
-        if (top < fallbackTop) {
-          fallbackTop = top
-          fallback = id
-        }
-      }
-      return fallback ?? sections[0].id
+      return activeId
     }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.target.id) {
-            if (entry.isIntersecting) intersectingIds.add(entry.target.id)
-            else intersectingIds.delete(entry.target.id)
-          }
-        }
-        setActiveSection(getActiveId())
-      },
-      {
-        root: null,
-        rootMargin: `-${NAV_OFFSET}px 0px 0px 0px`,
-        threshold: 0,
-      }
-    )
-
-    sections.forEach((s) => observer.observe(s))
 
     const onHashChange = () => {
       const id = window.location.hash.slice(1)
       if (id && sections.some((s) => s.id === id)) {
+        // Keep the active state aligned to the latest measured header height.
+        navOffset = setNavOffsetCssVar()
+        const targetEl = document.getElementById(id)
+        if (targetEl) {
+          const r = targetEl.getBoundingClientRect()
+          const top = r.top + window.scrollY
+          const bottom = top + r.height
+          // Prevent the lock from getting "stuck" if layout/scroll timing is odd.
+          navLock = {
+            id,
+            top,
+            bottom,
+            until: Date.now() + 1500,
+            startScrollY: window.scrollY,
+          }
+        } else {
+          navLock = null
+        }
         setActiveSection(id)
       }
     }
 
+    let scrollRafId = null
     const onScroll = () => {
-      if (isAtBottom()) setActiveSection(sections[sections.length - 1].id)
+      // Keep active-section highlighting in sync while the page scrolls.
+      if (scrollRafId) return
+      scrollRafId = requestAnimationFrame(() => {
+        scrollRafId = null
+        navOffset = setNavOffsetCssVar()
+        const currentScrollY = window.scrollY
+        const marker = window.scrollY + navOffset + 1
+        if (navLock) {
+          // If we've scrolled away from the click target, stop forcing the clicked section.
+          if (Math.abs(currentScrollY - navLock.startScrollY) > 8) {
+            navLock = null
+            lastScrollY = currentScrollY
+            setActiveSection(getActiveId(navOffset))
+            return
+          }
+
+          // If the user scrolls away (especially upward), stop forcing the clicked section.
+          if (currentScrollY < lastScrollY - 2) {
+            navLock = null
+            lastScrollY = currentScrollY
+            setActiveSection(getActiveId(navOffset))
+            return
+          }
+
+          if (Date.now() > navLock.until) {
+            navLock = null
+            lastScrollY = currentScrollY
+            setActiveSection(getActiveId(navOffset))
+            return
+          }
+
+          const targetEl = document.getElementById(navLock.id)
+          if (targetEl) {
+            const r = targetEl.getBoundingClientRect()
+            const top = r.top + window.scrollY
+            const bottom = top + r.height
+            navLock.top = top
+            navLock.bottom = bottom
+          }
+
+          // Stay locked to the clicked section until the active line is inside it.
+          if (marker >= navLock.top - 1 && marker < navLock.bottom + 1) {
+            navLock = null
+            setActiveSection(getActiveId(navOffset))
+          } else {
+            setActiveSection(navLock.id)
+            lastScrollY = currentScrollY
+            return
+          }
+        } else {
+          setActiveSection(getActiveId(navOffset))
+        }
+
+        lastScrollY = currentScrollY
+      })
     }
 
-    setActiveSection(getActiveId())
+    setActiveSection(getActiveId(navOffset))
     window.addEventListener('hashchange', onHashChange)
     window.addEventListener('scroll', onScroll, { passive: true })
+
+    let rafId = null
+    const onResize = () => {
+      if (rafId) cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        navOffset = setNavOffsetCssVar()
+        navLock = null
+        setActiveSection(getActiveId(navOffset))
+      })
+    }
+    window.addEventListener('resize', onResize)
+
     return () => {
-      sections.forEach((s) => observer.unobserve(s))
       window.removeEventListener('hashchange', onHashChange)
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onResize)
+      if (rafId) cancelAnimationFrame(rafId)
+      if (scrollRafId) cancelAnimationFrame(scrollRafId)
     }
   }, [])
 
