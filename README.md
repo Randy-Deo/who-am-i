@@ -55,9 +55,9 @@ who-am-i/
 - **File:** `web/src/components/Navbar.jsx`
 - **What to edit:**
   - `brand-name`: Your name (e.g. `Randy Deo`)
-  - `brand-role`: Subtitle under name. Use two `<span className="brand-role-line">` elements so on mobile (≤1000px) they stack on separate lines (e.g. `Software Developer /` and `Quality Assurance Engineer`).
+  - `brand-role`: Subtitle under name. Use two `<span className="brand-role-line">` elements so on mobile (≤1024px) they stack on separate lines (e.g. `Software Developer /` and `Quality Assurance Engineer`).
   - `links`: Array of `{ id, href, label }` for each nav item. `id` must match the section `id` (e.g. `about`, `experience`, `skills`, `projects`, `contact`).
-- **Mobile:** At 1000px and below, the navbar shows a hamburger menu; the dropdown aligns to the right and stays on-screen. `MOBILE_BREAKPOINT` in Navbar.jsx and `@media (max-width: 1000px)` in CSS control this.
+- **Mobile:** At 1024px and below, the navbar shows a hamburger menu; the dropdown aligns to the right and stays on-screen. `MOBILE_BREAKPOINT` in Navbar.jsx and `@media (max-width: 1024px)` in CSS control this.
 
 ### Hero section (top of page)
 
@@ -133,12 +133,12 @@ who-am-i/
 
 - **File:** `web/src/index.css`
 - **Variables:** Defined in `:root`. Important ones:
-  - `--content-max`: Max width of navbar and main content (default `960px`).
-  - `--content-padding-x`: Horizontal padding for navbar and main content (default `60px`; overridden to `24px` at 1000px and `16px` at 768px in media queries).
+  - `--content-max`: Max width of navbar and main content (default `1440px`).
+  - `--content-padding-x`: Horizontal padding for navbar and main content (default `60px`; overridden to `24px` at 1024px and `16px` at 768px in media queries).
   - `--accent`: Accent color (e.g. cyan `#5de5c7`). Used for links, bullets, timeline dots, section period, nav underline, project-card--current border, etc.
   - `--text`, `--text-h`, `--muted`, `--bg`, `--bg-elevated`, `--border`: Text and background colors.
 
-Changing `--content-max` or `--content-padding-x` affects both the navbar and the main content width; the scrolling tech bar is sized to match the navbar. Breakpoints for navbar (hamburger) and padding are at **1000px** in both `Navbar.jsx` and `App.css`/`index.css`.
+Changing `--content-max` or `--content-padding-x` affects both the navbar and the main content width; the scrolling tech bar is sized to match the navbar. Breakpoints for navbar (hamburger) and padding are at **1024px** in both `Navbar.jsx` and `App.css`/`index.css`.
 
 ### Component and section styles
 

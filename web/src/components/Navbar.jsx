@@ -8,7 +8,7 @@ const links = [
   { id: 'contact', href: '#contact', label: 'Contact' },
 ]
 
-const MOBILE_BREAKPOINT = 1000
+const MOBILE_BREAKPOINT = 1024
 
 export function Navbar({ activeSection }) {
   const [menuOpen, setMenuOpen] = useState(false)
