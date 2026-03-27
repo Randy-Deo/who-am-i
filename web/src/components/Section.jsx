@@ -1,6 +1,6 @@
-export function Section({ id, label, title, children, hideHeader = false }) {
+export function Section({ id, title, children, hideHeader = false, className = '' }) {
   return (
-    <section id={id} className="section">
+    <section id={id} className={['section', className].filter(Boolean).join(' ')}>
       {!hideHeader && (
         <div className="section-header">
           <div className="section-title">

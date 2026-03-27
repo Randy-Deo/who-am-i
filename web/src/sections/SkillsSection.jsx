@@ -3,7 +3,7 @@ import { skills } from '../data/skills.js'
 
 export function SkillsSection() {
   return (
-    <Section id="skills" label="Skills" title="Skills">
+    <Section id="skills" title="Skills">
       <div className="skills-groups">
         {skills.map((group) => (
           <div key={group.id} className="skills-group-card">

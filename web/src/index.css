@@ -5,6 +5,21 @@
 
   --content-max: 1440px;
   --content-padding-x: 60px;
+  /* Matches .app-header top padding (space from viewport to brand) */
+  --app-header-padding-top: 22px;
+  --app-header-padding-bottom: 18px;
+  /* Space between main content and fixed nav / tech bar (same top & bottom) */
+  --shell-content-edge-gap: 32px;
+  /*
+    Viewport top → bottom of fixed header (1px border included).
+    Matches logo row height 44px; see wider breakpoint when brand stacks.
+  */
+  --app-header-clearance: calc(
+    var(--app-header-padding-top) + 44px + var(--app-header-padding-bottom) + 1px
+  );
+  /* Fixed header + small buffer for #anchor scroll (section has its own top padding) */
+  --nav-offset: calc(var(--app-header-clearance) + 12px);
+  --site-tech-footer-h: calc(56px + var(--app-header-padding-top));
 
   --bg: #0e1419;
   --bg-elevated: #0e1419;
@@ -33,12 +48,23 @@ html {
   overflow-x: hidden;
 }
 
+html.route-home {
+  height: 100%;
+  overflow: hidden;
+  --home-rhythm: 2rem;
+}
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
   max-width: 100%;
+}
+
+html.route-home body {
+  height: 100%;
+  overflow: hidden;
 }
 
 #root {
@@ -49,6 +75,37 @@ body {
   justify-content: center;
   padding: 32px 16px;
   box-sizing: border-box;
+}
+
+html.route-home #root {
+  height: 100dvh;
+  max-height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Home: allow vertical scroll when viewport is shorter than 1080px */
+@media (max-height: 1079px) {
+  html.route-home {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  html.route-home body {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  html.route-home #root {
+    height: auto;
+    max-height: none;
+    min-height: 100dvh;
+    overflow: visible;
+  }
 }
 
 .shell {
@@ -65,13 +122,30 @@ body {
   flex-direction: column;
 }
 
+/*
+  Subpages: top padding = header clearance only; first .section adds the same 50px top
+  padding as between sections (About → Experience, etc.).
+  Home keeps extra top inset for the hero layout.
+*/
 .shell-inner {
-  padding: 80px var(--content-padding-x) 40px;
+  padding: var(--app-header-clearance) var(--content-padding-x)
+    calc(40px + var(--shell-content-edge-gap));
+}
+
+/* Home only: reserve space for fixed tech stack footer + match previous hero top inset */
+.shell-inner--home {
+  padding-bottom: calc(var(--site-tech-footer-h) + var(--shell-content-edge-gap));
+  padding-top: calc(var(--app-header-clearance) + var(--shell-content-edge-gap));
 }
 
 @media (max-width: 1024px) {
   :root {
     --content-padding-x: 24px;
+    /* Taller header when role lines stack */
+    --app-header-clearance: calc(
+      var(--app-header-padding-top) + 3.5rem + var(--app-header-padding-bottom) + 1px
+    );
+    --nav-offset: calc(var(--app-header-clearance) + 12px);
   }
 }
 

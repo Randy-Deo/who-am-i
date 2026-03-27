@@ -21,7 +21,7 @@ export const projects = [
     description:
       'Personal portfolio with a responsive, dark-theme design and deployed on GitHub Pages—a place for a detailed breakdown of my roles without summarizing or losing too much detail.',
     tech: ['React', 'Vite', 'CSS'],
-    link: '#',
+    link: 'https://github.com/Randy-Deo/who-am-i',
   },
 ]
 
