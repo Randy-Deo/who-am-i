@@ -20,7 +20,7 @@ export const skills = [
   },
   {
     id: 'tools',
-    title: 'Tools & platforms',
+    title: 'Tools & Platforms',
     items: [
       'Atlassian (Jira, Confluence)',
       'Jenkins (CI/CD)',
@@ -33,17 +33,17 @@ export const skills = [
   },
   {
     id: 'practices',
-    title: 'Practices & domains',
+    title: 'Practices & Domains',
     items: [
       'Microservices & REST APIs',
       'Domain-driven design (DDD)',
       'Test-driven design (TDD)',
-      'Feature flagging',
+      'Feature Flagging',
       'Agile / Scrum',
       'Onboarding',
-      'Documentation creation',
+      'Documentation Creation',
       '3D-Secure / EMVCo (payment authentication)',
-      'On Call & technical support',
+      'On-call & Technical Support',
     ],
   },
 ]

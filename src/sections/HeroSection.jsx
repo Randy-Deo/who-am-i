@@ -20,7 +20,7 @@ export function HeroSection() {
           </h1>
           <p className="hero-tagline">
             I create quality-driven solutions with a developer&apos;s mindset and a tester&apos;s
-            precision, delivering results trusted by teams and users..
+            precision, delivering results trusted by teams and users.
           </p>
         </div>
       </div>

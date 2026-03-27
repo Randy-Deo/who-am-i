@@ -32,6 +32,31 @@
   --accent-border: #5de5c7;
   --timeline: #0e1419;
 
+  /* Shared UI tokens */
+  --card-radius: 12px;
+  --card-border: 1px solid rgba(148, 163, 184, 0.25);
+  --card-bg: rgba(30, 41, 59, 0.6);
+  --card-bg-hover: rgba(30, 41, 59, 0.85);
+  --card-padding: 16px 18px;
+  --card-border-hover: rgba(148, 163, 184, 0.5);
+  --motion-fast: 0.2s;
+
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 8px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 16px;
+  --space-7: 18px;
+
+  --icon-sm: 14px;
+  --icon-md: 18px;
+  --icon-lg: 22px;
+
+  --fs-body-md: 1rem;
+  --fs-body-sm: 0.9rem;
+  --fs-body-xs: 0.85rem;
+
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   font-synthesis: none;
