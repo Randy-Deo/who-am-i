@@ -12,23 +12,29 @@ export function CertificatesSection() {
     <Section id="certificates" title="Certificates">
       <div className="certificates-list" aria-label="Certificates">
         {certificates.map((cert) => (
-          <article key={cert.id} className="certificate-card">
+          <a
+            key={cert.id}
+            className="certificate-card certificate-card-link"
+            href={cert.url}
+            target="_blank"
+            rel="noreferrer"
+          >
             <div className="certificate-card-head">
               <h3 className="certificate-title">{cert.title}</h3>
             </div>
             <p className="certificate-meta">
               {cert.teacher
-                ? `${cert.teacher} | ${cert.issuer} – Issued ${cert.issued}`
-                : `${cert.issuer} – Issued ${cert.issued}`}
+                ? `${cert.teacher} | ${cert.issuer} - Issued ${cert.issued}`
+                : `${cert.issuer} - Issued ${cert.issued}`}
             </p>
             <p className="certificate-id">
-              Credential ID – <span className="certificate-id-value">{cert.credentialId}</span>
+              Credential ID - <span className="certificate-id-value">{cert.credentialId}</span>
             </p>
-            <a className="certificate-verify-link" href={cert.url} target="_blank" rel="noreferrer">
+            <span className="certificate-verify-link">
               View on {cert.issuer}
               <ExternalArrow />
-            </a>
-          </article>
+            </span>
+          </a>
         ))}
       </div>
       <p className="certificates-footnote">Additional certifications in progress.</p>

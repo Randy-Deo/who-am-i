@@ -21,7 +21,7 @@ export function Timeline({ items }) {
               )}
             </div>
             <span className="experience-date">
-              {item.start} – {item.end}
+              {item.start} - {item.end}
             </span>
           </div>
           <p className="experience-role">{item.role}</p>

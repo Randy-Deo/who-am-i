@@ -2,12 +2,12 @@ export const experience = [
   {
     id: 'zucitech',
     company: 'Zucitech Software Solutions Pvt. Ltd.',
-    role: 'Software Test Engineer – Consultant',
+    role: 'Software Test Engineer - Consultant',
     start: 'Oct 2024',
     end: 'Present',
     location: 'Remote',
     description:
-      'Lead QA for a high-traffic consumer streaming app: scope breakdown, assignment, documentation, onboarding, and test execution (manual and automated with Python/Selenium). Handles release support and defect management across the product.',
+      'Lead QA owning end-to-end quality for a high-traffic streaming platform across auth, subscriptions, payments, playback, and account flows. Translate product requirements into test strategy and execution across functional, regression, integration, cross-browser/device, exploratory, and end-to-end testing. Partner with engineering and product to validate UI/UX, APIs, and sensitive payment workflows, and improve release confidence through clear defect reporting, release validation, and Python/Selenium automation.',
     highlights: [
       'Own end-to-end quality for a high-traffic consumer streaming application across authentication, subscriptions, payments, playback, and account management flows.',
       'As Lead QA, join projects to build context and a holistic view of goals; break down scope into workable areas and assign ownership to teams and QA personnel.',
@@ -30,7 +30,7 @@ export const experience = [
     end: '2024',
     location: 'Remote',
     description:
-      'Software developer in an Agile, microservices environment. Built and maintained REST APIs and contributed to a U.S.-facing 3D-Secure payment service (EMVCo, Visa, Mastercard, Discover). Delivered features end-to-end with Unit/E2E/BDD testing, On Call support, and tooling such as AWS, Jenkins, and Atlassian.',
+      'Software developer in Agile/Scrum teams, building microservices and REST APIs in Golang and Python. Contributed to a U.S.-based 3D Secure authentication service aligned with EMVCo and integrated with Visa, Mastercard, and Discover APIs. Delivered features end-to-end with Unit/E2E/BDD testing, on-call support, and tooling across AWS, Jenkins, Atlassian, Kibana, and Datadog.',
     highlights: [
       'Received mentorship from senior developers and collaborated with the team on features, applying Scrum/Agile, Domain-driven design, and Test-driven design.',
       'Created and maintained technical documentation; designed, refined, and implemented solutions and new features on existing codebases and ongoing projects.',

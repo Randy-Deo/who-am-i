@@ -39,7 +39,7 @@ export function ContactSection({ layout = 'stack' }) {
       title="Contact"
       className={isHomeRow ? 'section--home-contact' : ''}
     >
-      <div className={`contact-grid${isHomeRow ? ' contact-grid--home' : ''}`}>
+      <div className="contact-grid">
         {contactLinks.map((link) => (
           <a
             key={link.id}

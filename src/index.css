@@ -10,6 +10,8 @@
   --app-header-padding-bottom: 18px;
   /* Space between main content and fixed nav / tech bar (same top & bottom) */
   --shell-content-edge-gap: 32px;
+  /* Home-only edge gap: fixed so top and bottom spacing stay equal on resize */
+  --home-edge-gap: var(--shell-content-edge-gap);
   /*
     Viewport top → bottom of fixed header (1px border included).
     Matches logo row height 44px; see wider breakpoint when brand stacks.
@@ -19,7 +21,7 @@
   );
   /* Fixed header + small buffer for #anchor scroll (section has its own top padding) */
   --nav-offset: calc(var(--app-header-clearance) + 12px);
-  --site-tech-footer-h: calc(56px + var(--app-header-padding-top));
+  --site-tech-footer-h: calc(56px + var(--app-header-padding-bottom));
 
   --bg: #0e1419;
   --bg-elevated: #0e1419;
@@ -31,6 +33,31 @@
   --accent-soft: #0f172a;
   --accent-border: #5de5c7;
   --timeline: #0e1419;
+
+  /* Shared UI tokens */
+  --card-radius: 12px;
+  --card-border: 1px solid rgba(148, 163, 184, 0.25);
+  --card-bg: rgba(30, 41, 59, 0.6);
+  --card-bg-hover: rgba(30, 41, 59, 0.85);
+  --card-padding: 16px 18px;
+  --card-border-hover: rgba(148, 163, 184, 0.5);
+  --motion-fast: 0.2s;
+
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 8px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 16px;
+  --space-7: 18px;
+
+  --icon-sm: 14px;
+  --icon-md: 18px;
+  --icon-lg: 22px;
+
+  --fs-body-md: 1rem;
+  --fs-body-sm: 0.9rem;
+  --fs-body-xs: 0.85rem;
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
@@ -132,10 +159,10 @@ html.route-home #root {
     calc(40px + var(--shell-content-edge-gap));
 }
 
-/* Home only: reserve space for fixed tech stack footer + match previous hero top inset */
+/* Home: keep extra top inset for hero layout */
 .shell-inner--home {
-  padding-bottom: calc(var(--site-tech-footer-h) + var(--shell-content-edge-gap));
-  padding-top: calc(var(--app-header-clearance) + var(--shell-content-edge-gap));
+  padding-bottom: 0;
+  padding-top: var(--app-header-clearance);
 }
 
 @media (max-width: 1024px) {
