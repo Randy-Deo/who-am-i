@@ -30,6 +30,8 @@ html.route-home .shell--home {
   flex-direction: column;
   justify-content: center;
   gap: var(--home-rhythm);
+  padding-top: var(--home-edge-gap);
+  box-sizing: border-box;
   overflow: hidden;
 }
 
@@ -54,13 +56,10 @@ html.route-home .shell--home {
 }
 
 .site-tech-footer {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  flex-shrink: 0;
+  margin-top: auto;
   width: 100%;
   max-width: var(--content-max);
-  z-index: 15;
   box-sizing: border-box;
   background: var(--bg);
   min-width: 0;
@@ -111,8 +110,8 @@ html.route-home .shell--home {
 }
 
 .home-page .hero-photo {
-  width: clamp(120px, 20vmin, 220px);
-  height: clamp(120px, 20vmin, 220px);
+  width: clamp(120px, 20vw, 220px);
+  height: clamp(120px, 20vw, 220px);
 }
 
 .home-page .home-hero-text .hero-tagline {
@@ -130,6 +129,7 @@ html.route-home .shell--home {
   flex-shrink: 0;
   padding-block: 0;
   border-bottom: none;
+  margin-bottom: var(--home-edge-gap);
 }
 
 .home-page .section--home-contact .section-header {
@@ -173,11 +173,16 @@ html.route-home .shell--home {
     flex: none;
     min-height: 0;
     overflow: visible;
-    padding-top: var(--home-rhythm);
+    padding-top: 0;
   }
 
   .home-hero-brand {
     flex: none;
     min-height: 0;
   }
+
+  .home-page .section--home-contact {
+    margin-bottom: var(--home-edge-gap);
+  }
+
 }

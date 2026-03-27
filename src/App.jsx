@@ -1,5 +1,5 @@
 import './App.css'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { BrowserRouter, Routes, Route, Outlet, useLocation } from 'react-router-dom'
 import { Navbar } from './components/Navbar.jsx'
 import { ScrollToTop } from './components/ScrollToTop.jsx'
@@ -18,7 +18,7 @@ function Layout() {
   const location = useLocation()
   const isHome = location.pathname === '/'
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.documentElement
     if (isHome) root.classList.add('route-home')
     else root.classList.remove('route-home')

@@ -10,6 +10,8 @@
   --app-header-padding-bottom: 18px;
   /* Space between main content and fixed nav / tech bar (same top & bottom) */
   --shell-content-edge-gap: 32px;
+  /* Home-only edge gap: fixed so top and bottom spacing stay equal on resize */
+  --home-edge-gap: var(--shell-content-edge-gap);
   /*
     Viewport top → bottom of fixed header (1px border included).
     Matches logo row height 44px; see wider breakpoint when brand stacks.
@@ -19,7 +21,7 @@
   );
   /* Fixed header + small buffer for #anchor scroll (section has its own top padding) */
   --nav-offset: calc(var(--app-header-clearance) + 12px);
-  --site-tech-footer-h: calc(56px + var(--app-header-padding-top));
+  --site-tech-footer-h: calc(56px + var(--app-header-padding-bottom));
 
   --bg: #0e1419;
   --bg-elevated: #0e1419;
@@ -157,10 +159,10 @@ html.route-home #root {
     calc(40px + var(--shell-content-edge-gap));
 }
 
-/* Home only: reserve space for fixed tech stack footer + match previous hero top inset */
+/* Home: keep extra top inset for hero layout */
 .shell-inner--home {
-  padding-bottom: calc(var(--site-tech-footer-h) + var(--shell-content-edge-gap));
-  padding-top: calc(var(--app-header-clearance) + var(--shell-content-edge-gap));
+  padding-bottom: 0;
+  padding-top: var(--app-header-clearance);
 }
 
 @media (max-width: 1024px) {
