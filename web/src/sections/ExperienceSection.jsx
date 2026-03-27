@@ -4,7 +4,7 @@ import { experience } from '../data/experience.js'
 
 export function ExperienceSection() {
   return (
-    <Section id="experience" label="Experience" title="Experience">
+    <Section id="experience" title="Experience">
       <Timeline items={experience} />
     </Section>
   )

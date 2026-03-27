@@ -3,33 +3,45 @@ import { projects } from '../data/projects.js'
 
 export function ProjectsSection() {
   return (
-    <Section id="projects" label="Selected work" title="Projects">
+    <Section id="projects" title="Projects">
       <div className="projects-grid">
-        {projects.map((project) => (
-          <article key={project.id} className={`project-card${project.id === 'portfolio' ? ' project-card--current' : ''}`}>
-            <div className="project-name-row">
-              <h2 className="project-name">{project.name}</h2>
-              {project.link && project.link !== '#' ? (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="project-link"
-                >
-                  View
-                </a>
-              ) : null}
-            </div>
-            <p className="project-description">{project.description}</p>
-            <ul className="project-tech-list">
-              {project.tech.map((tag) => (
-                <li key={tag} className="project-tech-item">
-                  {tag}
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
+        {projects.map((project) => {
+          const content = (
+            <>
+              <div className="project-name-row">
+                <h2 className="project-name">{project.name}</h2>
+              </div>
+              <p className="project-description">{project.description}</p>
+              <ul className="project-tech-list">
+                {project.tech.map((tag) => (
+                  <li key={tag} className="project-tech-item">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )
+
+          if (project.link && project.link !== '#') {
+            return (
+              <a
+                key={project.id}
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+                className="project-card project-card-link"
+              >
+                {content}
+              </a>
+            )
+          }
+
+          return (
+            <article key={project.id} className="project-card">
+              {content}
+            </article>
+          )
+        })}
       </div>
     </Section>
   )
